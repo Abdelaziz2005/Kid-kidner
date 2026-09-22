@@ -115,6 +115,7 @@
     height: 105px;
     border-bottom: 2px solid #20a4bd;
     padding: 0;
+   z-index: 10000;
 }
 
 
