@@ -1,0 +1,108 @@
+@if (auth.isAdmin()) {
+  <nav class="admin-navbar">
+  
+    
+  <div class="admin-logo">
+    <h2>Admin Panel</h2>
+  </div>
+
+  <div class="admin-links">
+    <a routerLink="/admin">Dashboard</a>
+    <a routerLink="/admin/users">Users</a>
+    <a routerLink="/admin/products">Products</a>
+    <a routerLink="/admin/settings">Settings</a>
+  </div>
+
+  <div class="admin-actions">
+    <span class="admin-name">Admin</span>
+
+
+      <button class="logout-btn" type="button" (click)="logout()">
+        Logout
+      </button>
+
+
+  </div>
+
+</nav>
+
+}
+@else if (auth.isLoggedIn()) {
+ <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid px-5">
+
+    
+    <a class="navbar-brand d-flex align-items-center" href="#">
+      <i class="bi bi-people-fill logo-icon"></i>
+      <span class="logo-text">KidKinder</span>
+    </a>
+
+    
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#mainNavbar"
+      aria-controls="mainNavbar"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    
+    <div class="collapse navbar-collapse" id="mainNavbar">
+
+      
+      <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/">Home</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/about">About</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/classes">Classes</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link " routerLink="/teachers">Teachers</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/gallery">Gallery</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/profile">Profile</a>
+        </li>
+
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="#">Contact</a>
+        </li>
+
+      </ul>
+
+      
+      
+
+    </div>
+  </div>
+</nav>
+
+}
+@else {
+  
+}
+
+
+
+
+
+
+

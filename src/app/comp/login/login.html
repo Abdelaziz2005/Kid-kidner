@@ -1,0 +1,21 @@
+<div class="container-fluid con1">
+<div class="container con">
+ <form>
+  <div><h1 class="h1 text text-center">Login</h1></div>
+  <div class="mb-3 e1 form-group">
+    <input type="email" class="form-control" name="email" placeholder="Email address" id="exampleInputEmail1" aria-describedby="emailHelp" [(ngModel)]="email" >
+    <p class="error" *ngIf="error_m3">{{ error_m3 }}</p>
+    
+  </div>
+  <div class="mb-3 e1 form-group">
+    <input type="password" class="form-control" name="password" placeholder="Password" id="exampleInputPassword1" [(ngModel)]="password" >
+    <p class="error" *ngIf="error_m2">{{ error_m2 }}</p>
+  </div>
+  <p class="error" *ngIf="error_m">{{ error_m }}</p>
+  <button type="button" class="btn btn-primary bt1" (click)="onSubmit()">Login</button>
+  <div class="register-text">
+    <p>No account? <a routerLink="/signup">Sign up</a></p>
+  </div>
+ </form>
+</div>
+</div>

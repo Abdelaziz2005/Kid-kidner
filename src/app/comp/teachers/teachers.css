@@ -1,0 +1,408 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DynaPuff:wght@400..700&family=Original+Surfer&family=Stylish&display=swap');
+
+:host {
+    --hero-ink: #f7fbfc;
+    --hero-muted: #c5e5e9;
+    --hero-accent: #f6c85f;
+    display: block;
+}
+
+.con1 {
+    min-height: 360px;
+    padding: 4rem 1.5rem;
+    display: grid;
+    place-items: center;
+    color: var(--hero-ink);
+    background-color: rgb(22, 126, 173);
+    overflow: hidden;
+    position: relative;
+    isolation: isolate;
+}
+
+.con1::after {
+    content: '';
+    width: 24rem;
+    height: 24rem;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 50%;
+    position: absolute;
+    right: -8rem;
+    bottom: -14rem;
+    z-index: -1;
+}
+
+.mini {
+    width: min(100%, 720px);
+    text-align: center;
+    animation: reveal 600ms ease-out both;
+}
+
+.con1 h1 {
+    margin: 0 0 1rem;
+    color: var(--hero-ink);
+    font-family: "Original Surfer", sans-serif;
+    font-size: clamp(2.5rem, 7vw, 4.5rem);
+    font-weight: 300;
+    line-height: 1.05;
+    letter-spacing: 0.02em;
+    text-shadow:
+        0 1px 0 #075b70,
+        0 4px 8px rgba(4, 46, 58, 0.22);
+}
+
+.con1 > .mini > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.55rem;
+    color: var(--hero-muted);
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+}
+
+.con1 span {
+    color: var(--hero-muted);
+}
+
+.con1 a {
+    color: var(--hero-ink);
+    text-decoration: none;
+    transition: color 180ms ease, transform 180ms ease;
+}
+
+.con1 a:hover,
+.con1 a:focus-visible {
+    color: var(--hero-accent);
+    transform: translateY(-2px);
+}
+
+.con1 a:focus-visible {
+    outline: 2px solid var(--hero-accent);
+    outline-offset: 4px;
+}
+
+.container:not(.con1) {
+    padding-top: clamp(4rem, 8vw, 7rem);
+    padding-bottom: clamp(4rem, 8vw, 7rem);
+    text-align: center;
+}
+
+.container:not(.con1) > p {
+    margin: 0 0 0.65rem;
+    color: #0f89a1;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+}
+
+.container:not(.con1) > h1 {
+    margin: 0 0 3rem;
+    color: #12313d;
+    font-family: 'Fredoka', 'Trebuchet MS', 'Comic Sans MS', cursive;
+    font-size: clamp(2rem, 5vw, 3.4rem);
+    font-weight: 300;
+    line-height: 1.15;
+    letter-spacing: 0.01em;
+    text-shadow: 0 2px 0 rgba(15, 137, 161, 0.12);
+}
+
+.container:not(.con1) .row {
+    row-gap: 2.5rem;
+}
+
+.teacher-card {
+    position: relative;
+    padding: 0 0.75rem;
+    text-align: center;
+}
+
+.teacher-card > img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border: 4px solid #e5f4f5;
+    transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.teacher-card:hover > img,
+.teacher-card:focus-within > img {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 18px rgba(18, 49, 61, 0.16);
+}
+
+.teacher-info p {
+    margin: 0;
+}
+
+.teacher-name {
+    margin-top: 0.7rem !important;
+    color: #12313d;
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.teacher-role {
+    margin-top: 0.2rem !important;
+    color: #6d8189;
+    font-size: 0.8rem;
+    text-transform: capitalize;
+}
+
+.teacher-social {
+    display: flex;
+    justify-content: center;
+    gap: 0.4rem;
+    min-height: 28px;
+    margin-top: 0.65rem;
+    opacity: 0;
+    transform: translateY(5px);
+    pointer-events: none;
+    transition: opacity 180ms ease, transform 180ms ease;
+}
+
+.teacher-card:hover .teacher-social,
+.teacher-card:focus-within .teacher-social {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.teacher-social a {
+    display: grid;
+    width: 28px;
+    height: 28px;
+    place-items: center;
+    color: #0f89a1;
+    border-radius: 50%;
+    transition: color 160ms ease, background-color 160ms ease, transform 160ms ease;
+}
+
+.teacher-social a:hover,
+.teacher-social a:focus-visible {
+    color: #ffffff;
+    background-color: #0f89a1;
+    transform: translateY(-2px);
+}
+
+.teacher-social a:focus-visible {
+    outline: 2px solid #f6c85f;
+    outline-offset: 2px;
+}
+
+.teacher-social svg {
+    width: 15px;
+    height: 15px;
+    fill: currentColor;
+}
+
+@media (max-width: 767px) {
+    .teacher-social {
+        opacity: 1;
+        transform: none;
+        pointer-events: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .container:not(.con1) {
+        padding-right: 1.25rem;
+        padding-left: 1.25rem;
+    }
+
+    .container:not(.con1) > h1 {
+        margin-bottom: 2rem;
+    }
+
+    .teacher-card > img {
+        width: 104px;
+        height: 104px;
+    }
+}
+
+
+
+@media (max-width: 480px) {
+    .con1 {
+        min-height: 300px;
+        padding: 3rem 1rem;
+    }
+
+    .con1 > .mini > div {
+        font-size: 0.95rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .mini,
+    .con1 a,
+    .teacher-card > img,
+    .teacher-social,
+    .teacher-social a {
+        animation: none;
+        transition: none;
+    }
+}
+
+
+.container {
+    max-width: 1400px;
+    margin: auto;
+    padding: 30px 0;
+    overflow: hidden;
+    
+}
+
+.teacher-divider {
+    height: 72px;
+    background: linear-gradient(180deg, #ffffff 0%, #eefafc 50%, #ffffff 100%);
+    border-top: 1px solid #dfeef2;
+    border-bottom: 1px solid #dfeef2;
+    box-shadow: inset 0 10px 20px rgba(24, 168, 193, 0.04);
+}
+
+.container h1 {
+    text-align: center;
+    font-size: 45px;
+    color: #00445f;
+    margin-bottom: 45px;
+    font-family: "Comic Sans MS", cursive;
+}
+
+.testimonial-section {
+    padding-top: 30px;
+    padding-bottom: 60px;
+    background: #fdffff;
+}
+
+.testimonial-section h1 {
+    font-size: clamp(2.2rem, 5vw, 3.3rem);
+    color: #00445f;
+    margin-bottom: 35px;
+    font-family: "Comic Sans MS", cursive;
+}
+
+.testimonial-carousel {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.testimonial-carousel .carousel-inner {
+    background: #f9fcfd;
+    border: 1px solid #dfeef2;
+    border-radius: 24px;
+    padding: 25px 30px;
+    box-shadow: 0 16px 40px rgba(0, 68, 95, 0.08);
+}
+
+.testimonial-carousel .carousel-item {
+    padding: 10px 20px;
+}
+
+.testimonial-carousel .carousel-item > p {
+    position: relative;
+    margin: 0 0 25px;
+    padding: 30px 35px 25px 60px;
+    background: linear-gradient(135deg, #ffffff 0%, #f4fbfd 100%);
+    border-radius: 18px;
+    color: #4f6472;
+    font-size: 1.05rem;
+    line-height: 1.9;
+    font-weight: 500;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.05);
+}
+
+.testimonial-carousel .carousel-item > p::before {
+    content: "“";
+    position: absolute;
+    left: 20px;
+    top: 10px;
+    font-size: 4rem;
+    line-height: 1;
+    color: #1aa8c2;
+    font-weight: bold;
+}
+
+.testimonial-carousel .carousel-item > div:last-child {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    margin-top: 10px;
+}
+
+.testimonial-carousel .carousel-item img {
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+    border: 4px solid #dff4f7;
+    box-shadow: 0 10px 22px rgba(0, 68, 95, 0.12);
+}
+
+.testimonial-carousel .parent-name {
+    margin: 0 0 6px;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #00445f;
+    font-family: "Comic Sans MS", cursive;
+}
+
+.testimonial-carousel .parent-role {
+    margin: 0;
+    font-size: 1rem;
+    color: #5d7785;
+    font-style: italic;
+}
+
+.testimonial-carousel .carousel-indicators {
+    position: static;
+    margin-top: 28px;
+    justify-content: center;
+    gap: 10px;
+}
+
+.testimonial-carousel .carousel-indicators button {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: none;
+    background: #d8dfe2;
+    opacity: 1;
+    transition: all 0.25s ease;
+}
+
+.testimonial-carousel .carousel-indicators button.active {
+    width: 34px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #18a8c1, #0a738c);
+}
+
+@media (max-width: 767px) {
+    .testimonial-carousel .carousel-item > p {
+        padding: 25px 20px 20px 45px;
+        font-size: 0.98rem;
+    }
+
+    .testimonial-carousel .carousel-item > div:last-child {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .testimonial-carousel .carousel-inner {
+        padding: 18px 14px;
+    }
+
+    .testimonial-carousel .carousel-item {
+        padding: 8px 6px;
+    }
+
+    .testimonial-carousel .parent-name {
+        font-size: 1.2rem;
+    }
+}
+
+
