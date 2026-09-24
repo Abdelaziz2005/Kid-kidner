@@ -1,0 +1,33 @@
+.admin-shell {
+  min-height: 100vh;
+  display: flex;
+  background: var(--kk-bg);
+}
+
+.admin-main {
+  flex: 1;
+  min-width: 0;
+  margin-left: 280px;
+}
+
+.admin-content {
+  padding: 1.5rem;
+}
+
+.mobile-scrim {
+  position: fixed;
+  inset: 0;
+  z-index: 1020;
+  border: 0;
+  background: rgba(15, 23, 42, 0.4);
+}
+
+@media (max-width: 991.98px) {
+  .admin-main {
+    margin-left: 0;
+  }
+
+  .admin-content {
+    padding: 1rem;
+  }
+}

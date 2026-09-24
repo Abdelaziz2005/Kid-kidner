@@ -1,0 +1,29 @@
+.metric {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem;
+}
+
+.metric span {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 8px;
+  background: #e7f8fb;
+  color: var(--kk-primary-dark);
+  font-size: 1.35rem;
+}
+
+.metric p {
+  margin: 0;
+  color: var(--kk-muted);
+  font-weight: 700;
+}
+
+.metric strong {
+  display: block;
+  font-size: 1.8rem;
+  line-height: 1.1;
+}

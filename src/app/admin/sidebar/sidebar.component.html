@@ -1,0 +1,18 @@
+<aside class="admin-sidebar" [class.is-open]="open">
+  <div class="brand">
+    <span class="brand-mark">K</span>
+    <div>
+      <strong>KidKinder</strong>
+      <small>Admin</small>
+    </div>
+  </div>
+
+  <nav class="nav flex-column gap-2">
+    @for (item of navItems; track item.route) {
+      <a class="nav-link" [routerLink]="item.route" routerLinkActive="active" (click)="navigated.emit()">
+        <i [class]="'bi ' + item.icon"></i>
+        <span>{{ item.label }}</span>
+      </a>
+    }
+  </nav>
+</aside>

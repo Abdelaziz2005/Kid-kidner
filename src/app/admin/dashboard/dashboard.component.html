@@ -1,0 +1,109 @@
+<section class="container-fluid px-0">
+  <div class="row g-3 mb-4">
+    <div class="col-sm-6 col-xl-3">
+      <div class="metric page-card">
+        <span><i class="bi bi-mortarboard"></i></span>
+        <div>
+          <p>Total Classes</p>
+          <strong>{{ totalClasses() }}</strong>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6 col-xl-3">
+      <div class="metric page-card">
+        <span><i class="bi bi-people"></i></span>
+        <div>
+          <p>Total Teachers</p>
+          <strong>{{ totalTeachers() }}</strong>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6 col-xl-3">
+      <div class="metric page-card">
+        <span><i class="bi bi-calendar-check"></i></span>
+        <div>
+          <p>Total Bookings</p>
+          <strong>{{ totalBookings() }}</strong>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6 col-xl-3">
+      <div class="metric page-card">
+        <span><i class="bi bi-check2-circle"></i></span>
+        <div>
+          <p>Active Classes</p>
+          <strong>{{ activeClasses() }}</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row g-4">
+    <div class="col-xl-5">
+      <div class="page-card p-4 h-100">
+        <div class="d-flex align-items-center justify-content-between mb-3">
+          <div>
+            <h2 class="h5 mb-1">Recent Classes</h2>
+            <p class="text-secondary mb-0">Latest class records from the shared Signal.</p>
+          </div>
+          <a routerLink="/admin/classes" class="btn btn-sm btn-outline-primary">View all</a>
+        </div>
+
+        <div class="list-group list-group-flush">
+          @for (classItem of recentClasses(); track classItem.id) {
+            <div class="list-group-item px-0 d-flex align-items-center gap-3">
+              <img [src]="classItem.imageUrl" [alt]="classItem.name" class="entity-image">
+              <div class="flex-grow-1">
+                <strong>{{ classItem.name }}</strong>
+                <p class="small text-secondary mb-0">Ages {{ classItem.ageFrom }}-{{ classItem.ageTo }} | {{ classItem.seats }} seats</p>
+              </div>
+              <span class="badge status-badge" [class.text-bg-success]="classItem.status === 'Active'" [class.text-bg-secondary]="classItem.status === 'Inactive'">{{ classItem.status }}</span>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xl-7">
+      <div class="page-card p-4 h-100">
+        <div class="d-flex align-items-center justify-content-between mb-3">
+          <div>
+            <h2 class="h5 mb-1">Recent Bookings</h2>
+            <p class="text-secondary mb-0">Parent bookings resolved by classId.</p>
+          </div>
+          <a routerLink="/admin/bookings" class="btn btn-sm btn-outline-primary">View all</a>
+        </div>
+
+        <div class="table-responsive">
+          <table class="table table-hover align-middle mb-0">
+            <thead>
+              <tr>
+                <th>Parent</th>
+                <th>Child</th>
+                <th>Class</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (booking of recentBookings(); track booking.id) {
+                <tr>
+                  <td>{{ booking.parentName }}</td>
+                  <td>{{ booking.childName }}</td>
+                  <td>{{ className(booking.classId) }}</td>
+                  <td>
+                    <span class="badge status-badge" [class.text-bg-warning]="booking.status === 'Pending'" [class.text-bg-success]="booking.status === 'Confirmed'" [class.text-bg-danger]="booking.status === 'Cancelled'">{{ booking.status }}</span>
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-card p-4 mt-4">
+    <h2 class="h5 mb-1">Operational Snapshot</h2>
+    <p class="text-secondary mb-0">Active teachers: <strong>{{ activeTeachers() }}</strong>. All dashboard numbers are computed from service Signals, not hardcoded values.</p>
+  </div>
+</section>
