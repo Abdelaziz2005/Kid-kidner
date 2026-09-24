@@ -1,0 +1,72 @@
+<section class="container-fluid px-0">
+  <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3 mb-4">
+    <div>
+      <h2 class="h3 mb-1">{{ isEditMode() ? 'Edit Booking' : 'Add Booking' }}</h2>
+      <p class="text-secondary mb-0">Bookings reference classes by classId and resolve names through ClassService.</p>
+    </div>
+    <a routerLink="/admin/bookings" class="btn btn-outline-secondary">Back to Bookings</a>
+  </div>
+
+  @if (notFound()) {
+    <div class="empty-state">
+      <i class="bi bi-exclamation-circle display-5 text-danger"></i>
+      <h3 class="h5 mt-3">Booking not found.</h3>
+      <p class="text-secondary">The booking may have been deleted or the route id is invalid.</p>
+      <a routerLink="/admin/bookings" class="btn btn-primary mt-2">Return to Bookings</a>
+    </div>
+  } @else {
+    <form class="page-card p-3 p-md-4" [formGroup]="form" (ngSubmit)="submit()" novalidate>
+      <div class="row g-3">
+        <div class="col-md-6">
+          <label class="form-label fw-semibold" for="parentName">Parent Name</label>
+          <input id="parentName" class="form-control" formControlName="parentName" [class.is-invalid]="hasError('parentName')">
+          <div class="invalid-feedback">Parent name is required.</div>
+        </div>
+        <div class="col-md-6">
+          <label class="form-label fw-semibold" for="parentEmail">Parent Email</label>
+          <input id="parentEmail" type="email" class="form-control" formControlName="parentEmail" [class.is-invalid]="hasError('parentEmail')">
+          <div class="invalid-feedback">Enter a valid parent email.</div>
+        </div>
+        <div class="col-md-6">
+          <label class="form-label fw-semibold" for="phone">Phone</label>
+          <input id="phone" class="form-control" formControlName="phone" [class.is-invalid]="hasError('phone')">
+          <div class="invalid-feedback">Phone is required.</div>
+        </div>
+        <div class="col-md-6">
+          <label class="form-label fw-semibold" for="childName">Child Name</label>
+          <input id="childName" class="form-control" formControlName="childName" [class.is-invalid]="hasError('childName')">
+          <div class="invalid-feedback">Child name is required.</div>
+        </div>
+        <div class="col-md-6">
+          <label class="form-label fw-semibold" for="classId">Class</label>
+          <select id="classId" class="form-select" formControlName="classId" [class.is-invalid]="hasError('classId')">
+            <option [ngValue]="0" disabled>Select a class</option>
+            @for (classItem of classes(); track classItem.id) {
+              <option [ngValue]="classItem.id">{{ classItem.name }}</option>
+            }
+          </select>
+          <div class="invalid-feedback">Class is required.</div>
+        </div>
+        <div class="col-md-3">
+          <label class="form-label fw-semibold" for="bookingDate">Booking Date</label>
+          <input id="bookingDate" type="date" class="form-control" formControlName="bookingDate" [class.is-invalid]="hasError('bookingDate')">
+          <div class="invalid-feedback">Booking date is required.</div>
+        </div>
+        <div class="col-md-3">
+          <label class="form-label fw-semibold" for="status">Status</label>
+          <select id="status" class="form-select" formControlName="status" [class.is-invalid]="hasError('status')">
+            <option value="Pending">Pending</option>
+            <option value="Confirmed">Confirmed</option>
+            <option value="Cancelled">Cancelled</option>
+          </select>
+          <div class="invalid-feedback">Status is required.</div>
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-end gap-2 mt-4">
+        <a routerLink="/admin/bookings" class="btn btn-outline-secondary">Cancel</a>
+        <button type="submit" class="btn btn-primary">{{ isEditMode() ? 'Update Booking' : 'Add Booking' }}</button>
+      </div>
+    </form>
+  }
+</section>

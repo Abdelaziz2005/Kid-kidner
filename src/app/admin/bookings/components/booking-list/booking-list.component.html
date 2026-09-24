@@ -1,0 +1,91 @@
+<section class="container-fluid px-0">
+  <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3 mb-4">
+    <div>
+      <h2 class="h3 mb-1">Bookings</h2>
+      <p class="text-secondary mb-0">Manage bookings while storing only classId for class relationships.</p>
+    </div>
+    <a routerLink="/admin/bookings/add" class="btn btn-primary">
+      <i class="bi bi-plus-lg me-2"></i>Add Booking
+    </a>
+  </div>
+
+  <div class="page-card p-3 p-md-4">
+    <div class="row g-3 mb-4">
+      <div class="col-md-8">
+        <label class="form-label fw-semibold" for="bookingSearch">Search</label>
+        <div class="input-group">
+          <span class="input-group-text"><i class="bi bi-search"></i></span>
+          <input #bookingSearch id="bookingSearch" type="search" class="form-control" placeholder="Search by parent or child name" (input)="searchTerm.set(bookingSearch.value)">
+        </div>
+      </div>
+      <div class="col-md-4">
+        <label class="form-label fw-semibold" for="bookingStatus">Status</label>
+        <select #bookingStatus id="bookingStatus" class="form-select" (change)="selectedStatus.set($any(bookingStatus.value))">
+          <option value="All">All</option>
+          <option value="Pending">Pending</option>
+          <option value="Confirmed">Confirmed</option>
+          <option value="Cancelled">Cancelled</option>
+        </select>
+      </div>
+    </div>
+
+    @if (filteredBookings().length > 0) {
+      <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0">
+          <thead>
+            <tr>
+              <th>Parent</th>
+              <th>Child</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Class</th>
+              <th>Booking Date</th>
+              <th>Status</th>
+              <th class="text-end">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (booking of filteredBookings(); track booking.id) {
+              <tr>
+                <td><strong>{{ booking.parentName }}</strong></td>
+                <td>{{ booking.childName }}</td>
+                <td>{{ booking.parentEmail }}</td>
+                <td>{{ booking.phone }}</td>
+                <td>{{ className(booking.classId) }}</td>
+                <td>{{ booking.bookingDate }}</td>
+                <td>
+                  <span class="badge status-badge" [class.text-bg-warning]="booking.status === 'Pending'" [class.text-bg-success]="booking.status === 'Confirmed'" [class.text-bg-danger]="booking.status === 'Cancelled'">{{ booking.status }}</span>
+                </td>
+                <td class="text-end">
+                  <div class="btn-group">
+                    <a [routerLink]="['/admin/bookings/edit', booking.id]" class="btn btn-sm btn-outline-primary" aria-label="Edit booking">
+                      <i class="bi bi-pencil"></i>
+                    </a>
+                    <button type="button" class="btn btn-sm btn-outline-danger" aria-label="Delete booking" (click)="askDelete(booking)">
+                      <i class="bi bi-trash"></i>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    } @else {
+      <div class="empty-state">
+        <i class="bi bi-calendar-check display-5 text-kidkinder"></i>
+        <h3 class="h5 mt-3">No bookings found.</h3>
+        <p class="text-secondary">Try a different search or create a new booking.</p>
+        <a routerLink="/admin/bookings/add" class="btn btn-primary mt-2">Add Booking</a>
+      </div>
+    }
+  </div>
+</section>
+
+<app-confirm-modal
+  title="Delete Booking?"
+  [message]="'Are you sure you want to delete the booking for ' + (bookingToDelete()?.childName ?? 'this child') + '?'"
+  [open]="bookingToDelete() !== null"
+  (cancelled)="cancelDelete()"
+  (confirmed)="confirmDelete()"
+></app-confirm-modal>

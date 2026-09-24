@@ -1,0 +1,93 @@
+<section class="container-fluid px-0">
+  <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3 mb-4">
+    <div>
+      <h2 class="h3 mb-1">Classes</h2>
+      <p class="text-secondary mb-0">Manage KidKinder class offerings through the shared ClassService.</p>
+    </div>
+    <a routerLink="/admin/classes/add" class="btn btn-primary">
+      <i class="bi bi-plus-lg me-2"></i>Add Class
+    </a>
+  </div>
+
+  <div class="page-card p-3 p-md-4">
+    <div class="row g-3 mb-4">
+      <div class="col-md-8">
+        <label class="form-label fw-semibold" for="classSearch">Search</label>
+        <div class="input-group">
+          <span class="input-group-text"><i class="bi bi-search"></i></span>
+          <input #classSearch id="classSearch" type="search" class="form-control" placeholder="Search by class name" (input)="searchTerm.set(classSearch.value)">
+        </div>
+      </div>
+      <div class="col-md-4">
+        <label class="form-label fw-semibold" for="classStatus">Status</label>
+        <select #classStatus id="classStatus" class="form-select" (change)="selectedStatus.set($any(classStatus.value))">
+          <option value="All">All</option>
+          <option value="Active">Active</option>
+          <option value="Inactive">Inactive</option>
+        </select>
+      </div>
+    </div>
+
+    @if (filteredClasses().length > 0) {
+      <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0">
+          <thead>
+            <tr>
+              <th>Image</th>
+              <th>Class Name</th>
+              <th>Age</th>
+              <th>Seats</th>
+              <th>Time</th>
+              <th>Fee</th>
+              <th>Status</th>
+              <th class="text-end">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (classItem of filteredClasses(); track classItem.id) {
+              <tr>
+                <td><img [src]="classItem.imageUrl" [alt]="classItem.name" class="entity-image"></td>
+                <td>
+                  <strong>{{ classItem.name }}</strong>
+                  <p class="small text-secondary mb-0">{{ classItem.description }}</p>
+                </td>
+                <td>{{ classItem.ageFrom }}-{{ classItem.ageTo }}</td>
+                <td>{{ classItem.seats }}</td>
+                <td>{{ classItem.startTime }} - {{ classItem.endTime }}</td>
+                <td>{{ classItem.fee }}</td>
+                <td>
+                  <span class="badge status-badge" [class.text-bg-success]="classItem.status === 'Active'" [class.text-bg-secondary]="classItem.status === 'Inactive'">{{ classItem.status }}</span>
+                </td>
+                <td class="text-end">
+                  <div class="btn-group">
+                    <a [routerLink]="['/admin/classes/edit', classItem.id]" class="btn btn-sm btn-outline-primary" aria-label="Edit class">
+                      <i class="bi bi-pencil"></i>
+                    </a>
+                    <button type="button" class="btn btn-sm btn-outline-danger" aria-label="Delete class" (click)="askDelete(classItem)">
+                      <i class="bi bi-trash"></i>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    } @else {
+      <div class="empty-state">
+        <i class="bi bi-mortarboard display-5 text-kidkinder"></i>
+        <h3 class="h5 mt-3">No classes found.</h3>
+        <p class="text-secondary">Try a different search or create a new class.</p>
+        <a routerLink="/admin/classes/add" class="btn btn-primary mt-2">Add Class</a>
+      </div>
+    }
+  </div>
+</section>
+
+<app-confirm-modal
+  title="Delete Class?"
+  [message]="'Are you sure you want to delete ' + (classToDelete()?.name ?? 'this class') + '?'"
+  [open]="classToDelete() !== null"
+  (cancelled)="cancelDelete()"
+  (confirmed)="confirmDelete()"
+></app-confirm-modal>

@@ -1,0 +1,19 @@
+@if (open) {
+  <div class="modal-backdrop-custom" role="presentation">
+    <div class="modal-dialog modal-dialog-centered m-0" role="dialog" aria-modal="true" [attr.aria-label]="title">
+      <div class="modal-content border-0 shadow-lg">
+        <div class="modal-header">
+          <h2 class="modal-title fs-5">{{ title }}</h2>
+          <button type="button" class="btn-close" aria-label="Close" (click)="cancelled.emit()"></button>
+        </div>
+        <div class="modal-body">
+          <p class="mb-0 text-secondary">{{ message }}</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" (click)="cancelled.emit()">{{ cancelLabel }}</button>
+          <button type="button" class="btn btn-danger" (click)="confirmed.emit()">{{ confirmLabel }}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+}

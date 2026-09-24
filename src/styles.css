@@ -1,1 +1,88 @@
 /* You can add global styles to this file, and also import other style files */
+:root {
+  --kk-bg: #f4f7fb;
+  --kk-surface: #ffffff;
+  --kk-border: #e4eaf2;
+  --kk-text: #1f2937;
+  --kk-muted: #6b7280;
+  --kk-primary: #17a2b8;
+  --kk-primary-dark: #0f7d90;
+  --kk-accent: #f7b731;
+  --kk-sidebar: #14213d;
+  --kk-sidebar-soft: #21355f;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--kk-bg);
+  color: var(--kk-text);
+  font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+a {
+  text-decoration: none;
+}
+
+.btn-primary {
+  --bs-btn-bg: var(--kk-primary);
+  --bs-btn-border-color: var(--kk-primary);
+  --bs-btn-hover-bg: var(--kk-primary-dark);
+  --bs-btn-hover-border-color: var(--kk-primary-dark);
+}
+
+.text-kidkinder {
+  color: var(--kk-primary);
+}
+
+.page-card {
+  background: var(--kk-surface);
+  border: 1px solid var(--kk-border);
+  border-radius: 8px;
+  box-shadow: 0 16px 40px rgba(20, 33, 61, 0.07);
+}
+
+.table > :not(caption) > * > * {
+  vertical-align: middle;
+}
+
+.entity-image {
+  width: 54px;
+  height: 54px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid var(--kk-border);
+}
+
+.status-badge {
+  border-radius: 999px;
+  padding: 0.45rem 0.7rem;
+  font-weight: 700;
+}
+
+.empty-state {
+  border: 1px dashed var(--kk-border);
+  border-radius: 8px;
+  padding: 2.5rem;
+  text-align: center;
+  background: #fbfdff;
+}
+
+.modal-backdrop-custom {
+  position: fixed;
+  inset: 0;
+  z-index: 1050;
+  display: grid;
+  place-items: center;
+  background: rgba(15, 23, 42, 0.52);
+  padding: 1rem;
+}
+

@@ -1,0 +1,16 @@
+<div class="admin-shell">
+  <app-sidebar [open]="sidebarOpen()" (navigated)="closeSidebar()"></app-sidebar>
+
+  @if (sidebarOpen()) {
+    <button type="button" class="mobile-scrim d-lg-none" aria-label="Close sidebar" (click)="closeSidebar()"></button>
+  }
+
+  <div class="admin-main">
+    <app-topbar (menuClicked)="toggleSidebar()"></app-topbar>
+    <main class="admin-content">
+      <router-outlet />
+    </main>
+  </div>
+
+  <app-toast></app-toast>
+</div>

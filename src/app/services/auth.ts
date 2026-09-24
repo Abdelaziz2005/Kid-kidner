@@ -1,15 +1,21 @@
-import { Service, signal } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { UserModel } from '../models/user.model';
 const u_key = 'app_users';
 const curr_uKey = 'current_user';
 const admin_email = 'admin@myapp.com';
-@Service()
+@Injectable({ providedIn: 'root' })
 export class Auth {
     private currentUser = signal<UserModel | null>(null);
 
     constructor() {
       const data = localStorage.getItem(curr_uKey);
       this.currentUser.set(data ? JSON.parse(data) : null);
+      
+      const users = this.getUsers();
+      if (!users.some(u => u.email === admin_email)) {
+         users.push({ name: 'Admin', age: 30, email: admin_email, password: 'password123' });
+         localStorage.setItem(u_key, JSON.stringify(users));
+      }
     }
 
   signup(user: UserModel): { success: boolean; message: string } {

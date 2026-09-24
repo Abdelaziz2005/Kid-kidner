@@ -1,0 +1,66 @@
+<section class="container-fluid px-0">
+  <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3 mb-4">
+    <div>
+      <h2 class="h3 mb-1">{{ isEditMode() ? 'Edit Teacher' : 'Add Teacher' }}</h2>
+      <p class="text-secondary mb-0">Teacher forms update TeacherService only; components never mutate arrays directly.</p>
+    </div>
+    <a routerLink="/admin/teachers" class="btn btn-outline-secondary">Back to Teachers</a>
+  </div>
+
+  @if (notFound()) {
+    <div class="empty-state">
+      <i class="bi bi-exclamation-circle display-5 text-danger"></i>
+      <h3 class="h5 mt-3">Teacher not found.</h3>
+      <p class="text-secondary">The teacher may have been deleted or the route id is invalid.</p>
+      <a routerLink="/admin/teachers" class="btn btn-primary mt-2">Return to Teachers</a>
+    </div>
+  } @else {
+    <form class="page-card p-3 p-md-4" [formGroup]="form" (ngSubmit)="submit()" novalidate>
+      <div class="row g-3">
+        <div class="col-md-6">
+          <label class="form-label fw-semibold" for="name">Name</label>
+          <input id="name" class="form-control" formControlName="name" [class.is-invalid]="hasError('name')">
+          <div class="invalid-feedback">Name is required.</div>
+        </div>
+        <div class="col-md-6">
+          <label class="form-label fw-semibold" for="subject">Subject</label>
+          <input id="subject" class="form-control" formControlName="subject" [class.is-invalid]="hasError('subject')">
+          <div class="invalid-feedback">Subject is required.</div>
+        </div>
+        <div class="col-md-6">
+          <label class="form-label fw-semibold" for="email">Email</label>
+          <input id="email" type="email" class="form-control" formControlName="email" [class.is-invalid]="hasError('email')">
+          <div class="invalid-feedback">Enter a valid email address.</div>
+        </div>
+        <div class="col-md-6">
+          <label class="form-label fw-semibold" for="phone">Phone</label>
+          <input id="phone" class="form-control" formControlName="phone" [class.is-invalid]="hasError('phone')">
+          <div class="invalid-feedback">Phone is required.</div>
+        </div>
+        <div class="col-md-8">
+          <label class="form-label fw-semibold" for="imageUrl">Image URL</label>
+          <input id="imageUrl" class="form-control" formControlName="imageUrl" [class.is-invalid]="hasError('imageUrl')">
+          <div class="invalid-feedback">Image URL is required.</div>
+        </div>
+        <div class="col-md-4">
+          <label class="form-label fw-semibold" for="status">Status</label>
+          <select id="status" class="form-select" formControlName="status" [class.is-invalid]="hasError('status')">
+            <option value="Active">Active</option>
+            <option value="Inactive">Inactive</option>
+          </select>
+          <div class="invalid-feedback">Status is required.</div>
+        </div>
+        <div class="col-12">
+          <label class="form-label fw-semibold" for="bio">Bio</label>
+          <textarea id="bio" rows="4" class="form-control" formControlName="bio" [class.is-invalid]="hasError('bio')"></textarea>
+          <div class="invalid-feedback">Bio is required.</div>
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-end gap-2 mt-4">
+        <a routerLink="/admin/teachers" class="btn btn-outline-secondary">Cancel</a>
+        <button type="submit" class="btn btn-primary">{{ isEditMode() ? 'Update Teacher' : 'Add Teacher' }}</button>
+      </div>
+    </form>
+  }
+</section>
